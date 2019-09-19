@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "PRODUCTS")
+@Table
 public class Product {
 
     private long id;
@@ -12,7 +12,6 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     @Column(name = "ID")
     public long getId() {
         return id;

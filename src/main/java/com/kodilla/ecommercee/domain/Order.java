@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "ORDERS")
+@Table
 public class Order {
 
     private long id;
@@ -27,7 +27,6 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     @Column(name = "ID")
     public long getId() {
         return id;
