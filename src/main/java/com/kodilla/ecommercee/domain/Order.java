@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table
+@Table(name = "ORDERS")
 public class Order {
 
     private long id;
@@ -27,7 +27,7 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "ORDER_ID")
     public long getId() {
         return id;
     }
@@ -67,12 +67,7 @@ public class Order {
         this.user = user;
     }
 
-    @OneToMany(
-            targetEntity = Product.class,
-            mappedBy = "order",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "orders")
     public List<Product> getProducts() {
         return products;
     }

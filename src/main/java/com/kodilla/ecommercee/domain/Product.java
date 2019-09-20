@@ -1,18 +1,19 @@
 package com.kodilla.ecommercee.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
 public class Product {
 
     private long id;
-    private Order order;
+    private List<Order> orders = new ArrayList<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "PRODUCT_ID")
     public long getId() {
         return id;
     }
@@ -21,13 +22,17 @@ public class Product {
         this.id = id;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "ORDER_ID")
-    public Order getOrder() {
-        return order;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "JOIN_ORDER_PRODUCT",
+            joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")}
+    )
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }
