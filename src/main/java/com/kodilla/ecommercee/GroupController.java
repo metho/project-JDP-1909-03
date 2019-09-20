@@ -12,27 +12,27 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/v1/group")
 public class GroupController {
 
-    @RequestMapping(method = RequestMethod.GET, value = "getGroups")
+    @GetMapping(value = "all")
     public List<GroupDto> getGroups() {
         System.out.println("Getting list of groups");
         // implementation
         return new ArrayList<>();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getGroup")
-    public GroupDto getGroup(@RequestParam Long groupId) {
+    @GetMapping("{groupId}")
+    public GroupDto getGroup(@PathVariable Long groupId) {
         System.out.println("Getting a group by id");
         // implementation
         return new GroupDto();
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "createGroup", consumes = APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = APPLICATION_JSON_VALUE)
     public void createGroup(@RequestBody GroupDto groupDto) {
         System.out.println("Creating new group.");
         // implementation
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "updateGroup")
+    @PutMapping
     public GroupDto updateGroup(@RequestBody GroupDto groupDto) {
         System.out.println("Updating the Group");
         // implementation
