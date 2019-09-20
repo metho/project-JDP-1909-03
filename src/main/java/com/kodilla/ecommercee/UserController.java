@@ -3,23 +3,31 @@ package com.kodilla.ecommercee;
 import com.kodilla.ecommercee.domain.UserDto;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("v1/user")
 public class UserController {
-    @RequestMapping(method = RequestMethod.POST, value = "createUser")
+    @PostMapping
     public void createUser(@RequestBody UserDto userDto) {
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getUserKey")
-    public UserDto getUserKey(@RequestParam Long userKey) {
+    @GetMapping({"userKey"})
+    public UserDto getUser(@RequestParam String userKey) {
         return new UserDto();
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "deleteUserKey")
-    public void deleteUserKey(@RequestParam Long userKey) {
+    @GetMapping
+    public List<UserDto> getAllUsers(@RequestBody UserDto userDto) {
+        return new ArrayList<UserDto>();
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "UpdateUser")
+    @DeleteMapping("{userKey}")
+    public void deleteUserById(@PathVariable String userKey) {
+    }
+
+    @PutMapping("update")
     public UserDto updateUser(@RequestBody UserDto userDto) {
         return new UserDto();
     }
