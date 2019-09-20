@@ -3,9 +3,7 @@ package com.kodilla.ecommercee;
 import com.kodilla.ecommercee.domain.CartDto;
 import com.kodilla.ecommercee.domain.OrderDto;
 import com.kodilla.ecommercee.domain.ProductDto;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,28 +13,28 @@ public class CartController {
 
     static final String BASE_API = "v1/cart";
 
-    @RequestMapping(method = RequestMethod.POST, value = "new")
+    @PostMapping("new")
     public void createEmptyCart() {
         //implementation
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "products")
+    @GetMapping("products")
     public List<ProductDto> getCartProducts() {
         return new ArrayList<>();
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "products/add")
+    @PutMapping("product")
     public CartDto addProductToCart(ProductDto productDto) {
         return new CartDto();
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "products/delete")
+    @DeleteMapping("product")
     public CartDto deleteProductFromCart(Long productId) {
         return new CartDto();
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "order/new")
-    public OrderDto createOrderBasedOnCart(Long cartId) {
+    @PostMapping("order")
+    public OrderDto createOrderForCart(Long cartId) {
         return new OrderDto();
     }
 }
