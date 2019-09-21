@@ -12,31 +12,31 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/v1/product")
 public class ProductController {
 
-    @RequestMapping(method = RequestMethod.GET, value = "products")
+    @GetMapping(value = "all")
     public List<ProductDto> getProducts() {
         System.out.println("Getting list of products");
         return new ArrayList<>();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "product")
-    public ProductDto getProduct(@RequestParam Long productId) {
+    @GetMapping("{productId}")
+    public ProductDto getProduct(@PathVariable Long productId) {
         System.out.println("Getting a product by id");
         return new ProductDto();
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "product", consumes = APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = APPLICATION_JSON_VALUE)
     public void createProduct(@RequestBody ProductDto productDto) {
         System.out.println("Creating new product.");
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "update")
+    @PutMapping
     public ProductDto updateProduct(@RequestBody ProductDto productDto) {
         System.out.println("Updating the product");
         return new ProductDto();
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "product")
-    public void deleteProduct(@RequestParam Long productId) {
+    @DeleteMapping("{productId}")
+    public void deleteProduct(@PathVariable Long productId) {
         System.out.println("Delete product by id");
     }
 }
