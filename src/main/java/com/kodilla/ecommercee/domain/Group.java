@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table
 public class Group {
     private String name;
     private long id;

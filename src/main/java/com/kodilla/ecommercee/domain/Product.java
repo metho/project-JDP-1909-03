@@ -3,7 +3,6 @@ package com.kodilla.ecommercee.domain;
 import javax.persistence.*;
 
 @Entity
-@Table
 public class Product {
 
     private long id;
