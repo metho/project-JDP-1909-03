@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "ORDERS")
 public class Order {
 
     private long id;
