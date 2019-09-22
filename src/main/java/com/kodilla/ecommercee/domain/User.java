@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,7 +11,7 @@ public class User {
     private String name;
     private String surname;
     private Address address;
-    private List<Order> orders;
+    private List<Order> orders = new ArrayList<>();
     private Cart cart;
 
     public User() {
