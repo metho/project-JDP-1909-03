@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@Entity
 public class Order {
 
     private long id;

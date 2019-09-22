@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.domain;
 
 import javax.persistence.*;
 
+@Entity
 public class Cart {
 
     private long id;
