@@ -2,16 +2,17 @@ package com.kodilla.ecommercee.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "ORDERS")
 public class Order {
 
     private long id;
     private String number;
-    private Date orderDate;
+    private LocalDate orderDate;
     private User user;
     private List<Product> products = new ArrayList<>();
 
@@ -20,7 +21,7 @@ public class Order {
 
     public Order(String number, User user) {
         this.number = number;
-        this.orderDate = new Date();
+        this.orderDate = LocalDate.now();
         this.user = user;
     }
 
@@ -47,11 +48,11 @@ public class Order {
 
     @NotNull
     @Column(name = "ORDER_DATE")
-    public Date getOrderDate() {
+    public LocalDate getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
 

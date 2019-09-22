@@ -1,14 +1,14 @@
 package com.kodilla.ecommercee.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class User {
 
     private long id;
-    private List<Order> orders;
+    private List<Order> orders = new ArrayList<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
