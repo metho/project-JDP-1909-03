@@ -13,7 +13,7 @@ public class Cart {
 
     @Id
     @GeneratedValue
-    @Column(name = "ID", unique = true)
+    @Column(name = "ID")
     public long getId() {
         return id;
     }

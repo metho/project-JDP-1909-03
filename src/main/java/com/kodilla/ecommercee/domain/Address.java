@@ -23,7 +23,7 @@ public class Address {
 
     @Id
     @GeneratedValue
-    @Column(name = "ID", unique = true)
+    @Column(name = "ID")
     public long getId() {
         return id;
     }
