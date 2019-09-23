@@ -27,7 +27,7 @@ public class Group {
     public void setName(String name) {
         this.name = name;
     }
-
+  
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
