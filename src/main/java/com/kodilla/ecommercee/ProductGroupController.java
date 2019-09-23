@@ -8,7 +8,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/v1/group")
-public class GroupController {
+public class ProductGroupController {
 
     @GetMapping(value = "all")
     public List<ProductGroupDto> getProductGroups() {
