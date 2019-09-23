@@ -1,7 +1,7 @@
 package com.kodilla.ecommercee;
 
 import com.kodilla.ecommercee.domain.CartDto;
-import com.kodilla.ecommercee.domain.OrderDto;
+import com.kodilla.ecommercee.domain.UserOrderDto;
 import com.kodilla.ecommercee.domain.ProductDto;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class CartController {
     }
 
     @PostMapping("order")
-    public OrderDto createOrderForCart(Long cartId) {
-        return new OrderDto();
+    public UserOrderDto createOrderForCart(Long cartId) {
+        return new UserOrderDto();
     }
 }
