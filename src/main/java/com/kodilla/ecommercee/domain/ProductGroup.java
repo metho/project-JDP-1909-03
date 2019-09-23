@@ -5,18 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table (name="CATEGORY")
-public class Group {
+public class ProductGroup {
     private String name;
     private long id;
     private List<Product> products = new ArrayList<>();
 
-    public Group() {
+    public ProductGroup() {
     }
 
-    public Group(String name, long id) {
+    public ProductGroup(String name) {
         this.name = name;
-        this.id = id;
     }
 
     @Column(name = "NAME")
@@ -41,7 +39,7 @@ public class Group {
 
     @OneToMany(
             targetEntity = Product.class,
-            mappedBy = "group",
+            mappedBy = "productGroup",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )

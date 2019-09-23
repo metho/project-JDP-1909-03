@@ -2,10 +2,8 @@ package com.kodilla.ecommercee;
 
 import com.kodilla.ecommercee.domain.ProductDto;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController

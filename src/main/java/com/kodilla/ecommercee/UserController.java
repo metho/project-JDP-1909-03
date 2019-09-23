@@ -2,13 +2,13 @@ package com.kodilla.ecommercee;
 
 import com.kodilla.ecommercee.domain.UserDto;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("v1/user")
 public class UserController {
+
     @PostMapping
     public void createUser(@RequestBody UserDto userDto) {
     }
