@@ -14,8 +14,8 @@ public class Cart {
     }
 
     @Id
-    @GeneratedValue
-    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CART_ID")
     public long getId() {
         return id;
     }
