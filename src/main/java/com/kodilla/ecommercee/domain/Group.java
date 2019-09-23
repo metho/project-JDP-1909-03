@@ -5,18 +5,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Cart {
+@Table (name="CATEGORY")
+public class Group {
     private long id;
     private List<Product> products = new ArrayList<>();
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CART_ID")
+    @Column(name = "ID")
     public long getId() {
         return id;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "carts")
+    @OneToMany(
+            targetEntity = Product.class,
+            mappedBy = "group",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     public List<Product> getProducts() {
         return products;
     }
