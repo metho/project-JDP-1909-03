@@ -3,7 +3,6 @@ package com.kodilla.ecommercee.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -15,6 +14,7 @@ import java.util.List;
 @Getter
 @Entity
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PRODUCT_ID")
@@ -36,8 +36,8 @@ public class Product {
     private boolean availability;
 
     @ManyToOne
-    @JoinColumn(name = "CATEGORY_ID")
-    private Group group;
+    @JoinColumn(name = "PRODUCT_GROUP_ID")
+    private ProductGroup productGroup;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -45,7 +45,7 @@ public class Product {
             joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
             inverseJoinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")}
     )
-    private List<Order> orders = new ArrayList<>();
+    private List<UserOrder> userOrders = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(

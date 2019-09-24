@@ -11,7 +11,7 @@ public class User {
     private String name;
     private String surname;
     private Address address;
-    private List<Order> orders = new ArrayList<>();
+    private List<UserOrder> userOrders = new ArrayList<>();
     private Cart cart;
 
     public User() {
@@ -51,13 +51,13 @@ public class User {
     }
 
     @OneToMany(
-            targetEntity = Order.class,
+            targetEntity = UserOrder.class,
             mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    public List<Order> getOrders() {
-        return orders;
+    public List<UserOrder> getUserOrders() {
+        return userOrders;
     }
 
     @OneToOne(
@@ -85,8 +85,8 @@ public class User {
         this.address = address;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setUserOrders(List<UserOrder> userOrders) {
+        this.userOrders = userOrders;
     }
 
     public void setCart(Cart cart) {

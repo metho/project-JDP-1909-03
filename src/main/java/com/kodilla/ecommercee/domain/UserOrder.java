@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "ORDERS")
-public class Order {
+public class UserOrder {
 
     private long id;
     private String number;
@@ -16,10 +15,10 @@ public class Order {
     private User user;
     private List<Product> products = new ArrayList<>();
 
-    public Order() {
+    public UserOrder() {
     }
 
-    public Order(String number, User user) {
+    public UserOrder(String number, User user) {
         this.number = number;
         this.orderDate = LocalDate.now();
         this.user = user;
@@ -67,7 +66,7 @@ public class Order {
         this.user = user;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "orders")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "userOrders")
     public List<Product> getProducts() {
         return products;
     }
