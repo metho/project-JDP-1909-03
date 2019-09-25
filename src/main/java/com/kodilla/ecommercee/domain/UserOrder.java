@@ -66,7 +66,7 @@ public class UserOrder {
         this.user = user;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "userOrders")
+    @ManyToMany(mappedBy = "userOrders")
     public List<Product> getProducts() {
         return products;
     }
