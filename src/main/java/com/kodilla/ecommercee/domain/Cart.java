@@ -26,7 +26,7 @@ public class Cart {
         return user;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "carts")
+    @ManyToMany(mappedBy = "carts")
     public List<Product> getProducts() {
         return products;
     }

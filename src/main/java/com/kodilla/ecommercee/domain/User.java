@@ -41,29 +41,18 @@ public class User {
         return surname;
     }
 
-    @OneToOne(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
-    )
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ADDRESS_ID")
     public Address getAddress() {
         return address;
     }
 
-    @OneToMany(
-            targetEntity = UserOrder.class,
-            mappedBy = "user",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
+    @OneToMany(mappedBy = "user")
     public List<UserOrder> getUserOrders() {
         return userOrders;
     }
 
-    @OneToOne(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
-    )
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CART_ID")
     public Cart getCart() {
         return cart;
