@@ -13,9 +13,8 @@ public class ProductGroup {
     public ProductGroup() {
     }
 
-    public ProductGroup(String name, long id) {
+    public ProductGroup(String name) {
         this.name = name;
-        this.id = id;
     }
 
     @Column(name = "NAME")
