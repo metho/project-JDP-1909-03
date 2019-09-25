@@ -24,7 +24,7 @@ public class UserController {
     }
 
     @DeleteMapping("{userKey}")
-    public void deleteUserById(@PathVariable String userKey) {
+    public void deleteUserById(@PathVariable Long userKey) {
     }
 
     @PutMapping("update")

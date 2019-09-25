@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 public class Product {
 
@@ -54,4 +56,11 @@ public class Product {
             inverseJoinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")}
     )
     private List<Cart> carts = new ArrayList<>();
+
+    public Product(String name, String description, BigDecimal price, boolean availability) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.availability = availability;
+    }
 }
