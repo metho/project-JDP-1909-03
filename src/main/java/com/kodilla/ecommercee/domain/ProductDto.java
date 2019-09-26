@@ -15,5 +15,5 @@ public class ProductDto {
     private String description;
     private BigDecimal price;
     private boolean availability;
-    private ProductGroup productGroup;
+    private long groupId;
 }
