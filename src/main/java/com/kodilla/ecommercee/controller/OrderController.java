@@ -1,6 +1,6 @@
-package com.kodilla.ecommercee;
+package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.UserOrderDto;
+import com.kodilla.ecommercee.dto.UserOrderDto;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
