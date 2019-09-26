@@ -14,6 +14,6 @@ public class UserOrderDto {
     private long id;
     private String number;
     private LocalDate orderDate;
-    private User user;
-    private List<Product> products;
+    private long userId;
+    private List<ProductDto> products;
 }
