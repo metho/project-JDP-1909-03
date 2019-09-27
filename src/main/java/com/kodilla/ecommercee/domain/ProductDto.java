@@ -1,4 +1,4 @@
-package com.kodilla.ecommercee.domain;
+com.kodilla.ecommercee.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
