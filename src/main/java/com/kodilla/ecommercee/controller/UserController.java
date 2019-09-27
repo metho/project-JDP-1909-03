@@ -17,7 +17,7 @@ public class UserController {
         System.out.println("Create new user");
     }
 
-    @GetMapping({"userId"})
+    @GetMapping("{userId}")
     public UserDto getUser(@PathVariable Long userId) {
         System.out.println("Get user by ID");
         return new UserDto();
