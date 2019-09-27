@@ -1,19 +1,16 @@
-package com.kodilla.ecommercee.domain;
+package com.kodilla.ecommercee.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
-public class UserOrderDto {
+@AllArgsConstructor
+public class ProductGroupDto {
+    private String name;
     private long id;
-    private String number;
-    private LocalDate orderDate;
-    private long userId;
     private List<ProductDto> products;
 }
