@@ -20,13 +20,13 @@ public class Cart {
         return id;
     }
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "USER_ID")
     public User getUser() {
         return user;
     }
 
-    @ManyToMany(mappedBy = "carts")
+    @ManyToMany(cascade=CascadeType.ALL, mappedBy = "carts")
     public List<Product> getProducts() {
         return products;
     }
