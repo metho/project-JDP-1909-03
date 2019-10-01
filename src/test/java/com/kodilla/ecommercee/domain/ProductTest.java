@@ -14,6 +14,8 @@ import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ProductTest {
@@ -32,8 +34,8 @@ public class ProductTest {
         productRepository.save(product);
         //Then
         Long productId = product.getId();
-        Optional<Product> saveProduct = productRepository.findById(productId);
-        Assert.assertTrue(saveProduct.isPresent());
+        Optional<Product> savedProduct = productRepository.findById(productId);
+        assertThat(savedProduct).isPresent();
         //CleanUp
         productRepository.deleteById(productId);
     }
@@ -70,13 +72,17 @@ public class ProductTest {
         long product2Id = product2.getId();
         long product3Id = product3.getId();
 
-        Optional<Product> saveProduct1 = productRepository.findById(product1Id);
-        Optional<Product> saveProduct2 = productRepository.findById(product2Id);
-        Optional<Product> saveProduct3 = productRepository.findById(product3Id);
+        Optional<Product> savedProduct1 = productRepository.findById(product1Id);
+        Optional<Product> savedProduct2 = productRepository.findById(product2Id);
+        Optional<Product> savedProduct3 = productRepository.findById(product3Id);
         //Then
-        Assert.assertNotEquals(0, saveProduct1);
-        Assert.assertNotEquals(0, saveProduct2);
-        Assert.assertNotEquals(0, saveProduct3);
+        Assert.assertEquals(2, cart1.getProducts().size());
+        Assert.assertEquals(2, cart2.getProducts().size());
+        Assert.assertEquals(1, cart3.getProducts().size());
+
+        assertThat(savedProduct1).isPresent();
+        assertThat(savedProduct2).isPresent();
+        assertThat(savedProduct3).isPresent();
         //CleanUp
         productRepository.deleteById(product1Id);
         productRepository.deleteById(product2Id);
@@ -117,13 +123,13 @@ public class ProductTest {
         long product2Id = product2.getId();
         long product3Id = product3.getId();
 
-        Optional<Product> saveProduct1 = productRepository.findById(product1Id);
-        Optional<Product> saveProduct2 = productRepository.findById(product2Id);
-        Optional<Product> saveProduct3 = productRepository.findById(product3Id);
+        Optional<Product> savedProduct1 = productRepository.findById(product1Id);
+        Optional<Product> savedProduct2 = productRepository.findById(product2Id);
+        Optional<Product> savedProduct3 = productRepository.findById(product3Id);
         //Then
-        Assert.assertNotEquals(0, saveProduct1);
-        Assert.assertNotEquals(0, saveProduct2);
-        Assert.assertNotEquals(0, saveProduct3);
+        assertThat(savedProduct1).isPresent();
+        assertThat(savedProduct2).isPresent();
+        assertThat(savedProduct3).isPresent();
         //CleanUP
         productRepository.deleteById(product1Id);
         productRepository.deleteById(product2Id);
@@ -150,13 +156,13 @@ public class ProductTest {
         long product2Id = product2.getId();
         long product3Id = product3.getId();
 
-        Optional<Product> saveProduct1 = productRepository.findById(product1Id);
-        Optional<Product> saveProduct2 = productRepository.findById(product2Id);
-        Optional<Product> saveProduct3 = productRepository.findById(product3Id);
+        Optional<Product> savedProduct1 = productRepository.findById(product1Id);
+        Optional<Product> savedProduct2 = productRepository.findById(product2Id);
+        Optional<Product> savedProduct3 = productRepository.findById(product3Id);
         //Then
-        Assert.assertNotEquals(0, saveProduct1);
-        Assert.assertNotEquals(0, saveProduct2);
-        Assert.assertNotEquals(0, saveProduct3);
+        assertThat(savedProduct1).isPresent();
+        assertThat(savedProduct2).isPresent();
+        assertThat(savedProduct3).isPresent();
         //CleanUP
         productRepository.deleteById(product1Id);
         productRepository.deleteById(product2Id);
