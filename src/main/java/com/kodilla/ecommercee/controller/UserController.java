@@ -23,31 +23,31 @@ public class UserController {
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     public void createUser(@RequestBody UserDto userDto) {
-        log.info("Create new user");
+        log.info("Create new user " + userDto.getName() + " " + userDto.getSurname());
         userService.saveUser(userMapper.mapToUser(userDto));
     }
 
     @GetMapping("{userId}")
     public UserDto getUser(@PathVariable Long userId) throws UserNotFoundException {
-        log.info("Get user by ID");
+        log.info("Get user by ID " + userId);
         return userMapper.mapToUserDto(userService.getUser(userId).orElseThrow(UserNotFoundException::new));
     }
 
     @GetMapping(value = "all")
     public List<UserDto> getAllUsers() {
-        log.info("Getting list of users");
+        log.info("Get list of users");
         return userMapper.mapToUserDtoList(userService.getAllUsers());
     }
 
     @DeleteMapping("{userId}")
     public void deleteUserById(@PathVariable Long userId) {
-        log.info("Delete user by ID");
+        log.info("Delete user by ID " + userId);
         userService.deleteUserById(userId);
     }
 
     @PutMapping
     public UserDto updateUser(@RequestBody UserDto userDto) {
-        log.info("Update the user");
+        log.info("Update the user with ID " + userDto.getId());
         return userMapper.mapToUserDto(userService.saveUser(userMapper.mapToUser(userDto)));
     }
 }

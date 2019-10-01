@@ -12,29 +12,29 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Slf4j
 public class ProductGroupController {
 
-    @GetMapping(value = "all")
-    public List<ProductGroupDto> getProductGroups() {
-        log.info("Getting list of groups");
+    @PostMapping(consumes = APPLICATION_JSON_VALUE)
+    public void createProductGroup(@RequestBody ProductGroupDto productGroupDto) {
+        log.info("Create new product group " + productGroupDto.getName());
         // implementation
-        return new ArrayList<>();
     }
 
     @GetMapping("{groupId}")
     public ProductGroupDto getProductGroup(@PathVariable Long groupId) {
-        log.info("Getting a group by id");
+        log.info("Get group by ID " + groupId);
         // implementation
         return new ProductGroupDto();
     }
 
-    @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    public void createProductGroup(@RequestBody ProductGroupDto productGroupDto) {
-        log.info("Creating new group.");
+    @GetMapping(value = "all")
+    public List<ProductGroupDto> getProductGroups() {
+        log.info("Get list of groups");
         // implementation
+        return new ArrayList<>();
     }
 
     @PutMapping
     public ProductGroupDto updateProductGroup(@RequestBody ProductGroupDto productGroupDto) {
-        log.info("Updating the Group");
+        log.info("Update the group with ID " + productGroupDto.getId());
         // implementation
         return new ProductGroupDto();
     }

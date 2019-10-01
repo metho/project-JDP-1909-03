@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(CartController.BASE_API)
+@RequestMapping("v1/cart")
 @Slf4j
 public class CartController {
-
-    static final String BASE_API = "v1/cart";
 
     @PostMapping("new")
     public void createEmptyCart() {
@@ -22,25 +20,25 @@ public class CartController {
 
     @GetMapping("products")
     public List<ProductDto> getCartProducts() {
-        log.info("Getting list of products in cart");
+        log.info("Get list of products in cart");
         return new ArrayList<>();
     }
 
     @PutMapping("product")
     public CartDto addProductToCart(ProductDto productDto) {
-        log.info("Add product to cart");
+        log.info("Add product " + productDto.getName() +" to cart " + productDto.getGroupId());
         return new CartDto();
     }
 
     @DeleteMapping("product")
     public CartDto deleteProductFromCart(Long productId) {
-        log.info("Delete product from cart");
+        log.info("Delete product by ID " + productId + " from cart");
         return new CartDto();
     }
 
     @PostMapping("order")
     public UserOrderDto createOrderForCart(Long cartId) {
-        log.info("Create order for cart");
+        log.info("Create order for cart " + cartId);
         return new UserOrderDto();
     }
 }

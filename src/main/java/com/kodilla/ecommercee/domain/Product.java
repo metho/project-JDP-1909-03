@@ -21,7 +21,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PRODUCT_ID")
-    private long id;
+    private Long id;
 
     @NotNull
     @Column(name = "NAME")
@@ -58,7 +58,8 @@ public class Product {
     )
     private List<Cart> carts = new ArrayList<>();
 
-    public Product(String name, String description, BigDecimal price, boolean availability) {
+    public Product(Long id, String name, String description, BigDecimal price, boolean availability) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
