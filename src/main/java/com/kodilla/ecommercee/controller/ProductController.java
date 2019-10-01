@@ -23,7 +23,7 @@ public class ProductController {
 
     @GetMapping("{productId}")
     public ProductDto getProduct(@PathVariable Long productId) throws ProductNotFoundException {
-        System.out.println("Getting a product by id.");
+        System.out.println("Getting a product with id " + productId);
         return productService.getProduct(productId);
     }
 
@@ -35,13 +35,13 @@ public class ProductController {
 
     @PutMapping
     public ProductDto updateProduct(@RequestBody ProductDto productDto) throws ProductNotFoundException {
-        System.out.println("Updating the product.");
+        System.out.println("Updating the product with id " + productDto.getId());
         return productService.updateProduct(productDto);
     }
 
     @DeleteMapping("{productId}")
-    public boolean deleteProduct(@PathVariable Long productId) throws ProductNotFoundException {
-        System.out.println("Delete product by id");
-        return productService.deleteProduct(productId);
+    public void deleteProduct(@PathVariable Long productId) throws ProductNotFoundException {
+        System.out.println("Deleting product with id " + productId);
+        productService.deleteProduct(productId);
     }
 }

@@ -35,11 +35,11 @@ public class ProductService {
         throw new ProductNotFoundException();
     }
 
-    public boolean deleteProduct(final Long productId) throws ProductNotFoundException {
+    public void deleteProduct(final Long productId) throws ProductNotFoundException {
         if (productRepository.findById(productId).isPresent()) {
             productRepository.deleteById(productId);
-            return true;
+        } else {
+            throw new ProductNotFoundException();
         }
-        throw new ProductNotFoundException();
     }
 }
