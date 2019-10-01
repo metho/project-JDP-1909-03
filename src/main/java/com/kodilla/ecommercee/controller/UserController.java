@@ -16,7 +16,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("v1/user")
 @Slf4j
 public class UserController {
-
     @Autowired
     private UserService userService;
     @Autowired
