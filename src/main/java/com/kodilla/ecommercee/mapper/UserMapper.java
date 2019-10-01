@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 public class UserMapper {
     public User mapToUser(final UserDto userDto) {
         return new User(
+                userDto.getId(),
                 userDto.getName(),
                 userDto.getSurname()
         );
