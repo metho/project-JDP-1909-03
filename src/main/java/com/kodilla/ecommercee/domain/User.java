@@ -20,7 +20,7 @@ public class User {
     @Id
     @GeneratedValue
     @Column(name = "ID")
-    private long id;
+    private Long id;
 
     @NotNull
     @Column(name = "NAME")
@@ -41,7 +41,8 @@ public class User {
     @JoinColumn(name = "CART_ID")
     private Cart cart;
 
-    public User(String name, String surname) {
+    public User(Long id, String name, String surname) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
     }
