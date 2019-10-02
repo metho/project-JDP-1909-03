@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+@RestController
 @RequestMapping("/v1/orders")
 public class OrderController {
 
