@@ -34,7 +34,9 @@ public class UserTestSuite {
     @Test
     public void testUserSave() {
         //Given
-        User user = new User(NAME, SURNAME);
+        User user = new User();
+        user.setName(NAME);
+        user.setSurname(SURNAME);
 
         //When
         userRepository.save(user);
@@ -51,7 +53,9 @@ public class UserTestSuite {
     @Test
     public void testUserFindBySurname() {
         //Given
-        User user = new User(NAME, SURNAME);
+        User user = new User();
+        user.setName(NAME);
+        user.setSurname(SURNAME);
         userRepository.save(user);
         String userSurname = user.getSurname();
 
@@ -69,7 +73,9 @@ public class UserTestSuite {
     @Test
     public void testUserSaveWithAddress() {
         //Given
-        User user = new User(NAME, SURNAME);
+        User user = new User();
+        user.setName(NAME);
+        user.setSurname(SURNAME);
         Address address = new Address(STREET, CODE, CITY);
         user.setAddress(address);
 
@@ -88,7 +94,9 @@ public class UserTestSuite {
     @Test
     public void testUserSaveWithCart() {
         //Given
-        User user = new User(NAME, SURNAME);
+        User user = new User();
+        user.setName(NAME);
+        user.setSurname(SURNAME);
         Cart cart = new Cart();
         user.setCart(cart);
 
