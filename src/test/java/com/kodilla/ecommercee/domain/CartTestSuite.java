@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
 import com.kodilla.ecommercee.repository.CartRepository;
+import com.kodilla.ecommercee.repository.UserRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,11 +12,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -23,6 +24,9 @@ public class CartTestSuite {
 
     @Autowired
     private CartRepository cartRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     private User johnS;
 
@@ -47,19 +51,14 @@ public class CartTestSuite {
         johnS.setCart(cart3);
         cart3.setUser(johnS);
 
+        userRepository.save(johnS);
+
         cart1.getProducts().add(product1);
         cart1.getProducts().add(product2);
         cart2.getProducts().add(product2);
         cart3.getProducts().add(product1);
         cart3.getProducts().add(product2);
         cart3.getProducts().add(product3);
-
-        product1.getCarts().add(cart1);
-        product1.getCarts().add(cart3);
-        product2.getCarts().add(cart1);
-        product2.getCarts().add(cart2);
-        product2.getCarts().add(cart3);
-        product3.getCarts().add(cart3);
 
         cartRepository.save(cart1);
         cartRepository.save(cart2);
@@ -78,22 +77,37 @@ public class CartTestSuite {
     }
 
     @Test
-    public void testSavingProducts(){
+    public void testSavingCarts(){
         //Given
         //When
-    long product1Id = product1.getId();
-    long product2Id = product2.getId();
-    long product3Id = product3.getId();
+    long cart1Id = cart1.getId();
+    long cart2Id = cart2.getId();
+    long cart3Id = cart3.getId();
 
         //Then
-        assertNotEquals(0, product1Id);
-        assertNotEquals(0, product2Id);
-        assertNotEquals(0, product3Id);
+        assertNotEquals(0, cart1Id);
+        assertNotEquals(0, cart2Id);
+        assertNotEquals(0, cart3Id);
+    }
+
+    @Test
+    public void testRetrievingProductsFromCarts(){
+        //Given
+        //When
+        List<Product> cart1products = cart1.getProducts();
+        List<Product> cart2products = cart2.getProducts();
+        List<Product> cart3products = cart3.getProducts();
+        //Then
+        assertEquals(2, cart1products.size());
+        assertEquals(1, cart2products.size());
+        assertEquals(3, cart3products.size());
+
     }
 
     @After
     public void cleanUp(){
 
         cartRepository.deleteById(cart1.getId());
+        userRepository.deleteById(johnS.getId());
     }
 }
