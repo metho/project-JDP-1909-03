@@ -15,12 +15,12 @@ public class OrderController {
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     public void createOrder(@RequestBody UserOrderDto userOrderDto) {
-        log.info("Create new order " + userOrderDto.getNumber() + " for user " + userOrderDto.getUserId());
+        log.info("Create new order {} for user {}", userOrderDto.getNumber(), userOrderDto.getUserId());
     }
 
     @GetMapping("{orderId}")
     public UserOrderDto getOrder(@PathVariable Long orderId) {
-        log.info("Get order by ID " + orderId);
+        log.info("Get order by ID = {}", orderId);
         return new UserOrderDto();
     }
 
@@ -32,12 +32,12 @@ public class OrderController {
 
     @DeleteMapping("{orderId}")
     public void deleteOrder(@PathVariable Long orderId) {
-        log.info("Delete order by ID " + orderId);
+        log.info("Delete order by ID = {}", orderId);
     }
 
     @PutMapping
     public UserOrderDto updateOrders(@RequestBody UserOrderDto userOrderDto) {
-        log.info("Update the order with ID " + userOrderDto.getId());
+        log.info("Update the order with ID = {}", userOrderDto.getId());
         return new UserOrderDto();
     }
 }

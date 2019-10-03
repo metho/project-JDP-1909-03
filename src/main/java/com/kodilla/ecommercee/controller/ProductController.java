@@ -16,12 +16,12 @@ public class ProductController {
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     public void createProduct(@RequestBody ProductDto productDto) {
-        log.info("Create new product " + productDto.getName());
+        log.info("Create new product {}", productDto.getName());
     }
 
     @GetMapping("{productId}")
     public ProductDto getProduct(@PathVariable Long productId) {
-        log.info("Get product by ID " + productId);
+        log.info("Get product by ID = {}", productId);
         return new ProductDto();
     }
 
@@ -33,12 +33,12 @@ public class ProductController {
 
     @DeleteMapping("{productId}")
     public void deleteProduct(@PathVariable Long productId) {
-        log.info("Delete product by ID " + productId);
+        log.info("Delete product by ID = {}", productId);
     }
 
     @PutMapping
     public ProductDto updateProduct(@RequestBody ProductDto productDto) {
-        log.info("Update the product with ID " + productDto.getId());
+        log.info("Update the product with ID = {}", productDto.getId());
         return new ProductDto();
     }
 }

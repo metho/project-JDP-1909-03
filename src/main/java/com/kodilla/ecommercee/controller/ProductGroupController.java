@@ -14,13 +14,13 @@ public class ProductGroupController {
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     public void createProductGroup(@RequestBody ProductGroupDto productGroupDto) {
-        log.info("Create new product group " + productGroupDto.getName());
+        log.info("Create new product group {}", productGroupDto.getName());
         // implementation
     }
 
     @GetMapping("{groupId}")
     public ProductGroupDto getProductGroup(@PathVariable Long groupId) {
-        log.info("Get group by ID " + groupId);
+        log.info("Get group by ID = {}", groupId);
         // implementation
         return new ProductGroupDto();
     }
@@ -34,7 +34,7 @@ public class ProductGroupController {
 
     @PutMapping
     public ProductGroupDto updateProductGroup(@RequestBody ProductGroupDto productGroupDto) {
-        log.info("Update the group with ID " + productGroupDto.getId());
+        log.info("Update the group with ID = {}", productGroupDto.getId());
         // implementation
         return new ProductGroupDto();
     }
