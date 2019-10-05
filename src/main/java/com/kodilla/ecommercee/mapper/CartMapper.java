@@ -5,6 +5,8 @@ import com.kodilla.ecommercee.dto.CartDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class CartMapper {
 
@@ -12,10 +14,10 @@ public class CartMapper {
     private ProductMapper productMapper;
 
     public CartDto mapToCartDto(final Cart cart) {
-        return new CartDto(
-                cart.getId(),
-                cart.getUser().getId(),
-                productMapper.mapToProductDtoList(cart.getProducts())
-        );
+        CartDto cartDto = new CartDto();
+        cartDto.setId(cart.getId());
+        Optional.ofNullable(cart.getUser()).ifPresent(user -> cartDto.setId(user.getId()));
+        cartDto.setProducts(productMapper.mapToProductDtoList(cart.getProducts()));
+        return cartDto;
     }
 }

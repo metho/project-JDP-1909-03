@@ -4,7 +4,9 @@ import com.kodilla.ecommercee.dto.CartDto;
 import com.kodilla.ecommercee.dto.UserOrderDto;
 import com.kodilla.ecommercee.dto.ProductDto;
 import com.kodilla.ecommercee.exception.CartNotFoundException;
+import com.kodilla.ecommercee.exception.NumberAlreadyInDatabaseException;
 import com.kodilla.ecommercee.exception.ProductNotFoundException;
+import com.kodilla.ecommercee.exception.UserNotFoundException;
 import com.kodilla.ecommercee.service.CartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/cart")
+@RequestMapping(CartController.BASE_API)
 @Slf4j
 public class CartController {
 
@@ -22,9 +24,9 @@ public class CartController {
     private CartService cartService;
 
     @PostMapping()
-    public CartDto createEmptyCart() {
+    public CartDto createEmptyCart(@RequestParam Long userId) throws UserNotFoundException {
         log.info("Create new cart");
-        return cartService.createEmptyCart();
+        return cartService.createEmptyCart(userId);
     }
 
     @GetMapping("products")
@@ -46,8 +48,8 @@ public class CartController {
     }
 
     @PostMapping("order")
-    public UserOrderDto createOrderForCart(@RequestParam Long cartId) throws CartNotFoundException {
+    public UserOrderDto createOrderForCart(@RequestParam Long cartId, @RequestParam String number) throws CartNotFoundException, UserNotFoundException, NumberAlreadyInDatabaseException {
         log.info("Create order for cart {}", cartId);
-        return cartService.createOrderForCart(cartId);
+        return cartService.createOrderForCart(cartId, number);
     }
 }

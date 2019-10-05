@@ -50,7 +50,7 @@ public class ProductGroupTest {
     public void testAddProduct() {
         //Given
         ProductGroup productGroup = new ProductGroup(GROUP_NAME);
-        Product product = new Product(1L, PRODUCT_NAME, DESCRIPTION, PRICE, true);
+        Product product = new Product(PRODUCT_NAME, DESCRIPTION, PRICE, true);
         product.setProductGroup(productGroup);
         productGroup.addProduct(product);
 
