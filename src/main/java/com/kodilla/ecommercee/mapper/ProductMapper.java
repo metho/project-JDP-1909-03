@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class ProductMapper {
 
     public ProductDto mapToProductDto(final Product product) {
-                ProductDto productDto = new ProductDto(
+        ProductDto productDto = new ProductDto(
                 product.getId(),
                 product.getName(),
                 product.getDescription(),
@@ -21,6 +21,16 @@ public class ProductMapper {
             productDto.setProductGroupId(product.getProductGroup().getId());
         }
         return productDto;
+    }
+
+    public Product mapToProduct(final ProductDto productDto) {
+        return new Product(
+                productDto.getId(),
+                productDto.getName(),
+                productDto.getDescription(),
+                productDto.getPrice(),
+                productDto.isAvailable()
+        );
     }
 
     public List<ProductDto> mapToProductDtoList(final List<Product> products) {

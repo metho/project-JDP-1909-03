@@ -65,6 +65,13 @@ public class Product {
         this.available = available;
     }
 
+    public Product(String name, String description, BigDecimal price, boolean available) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.available = available;
+    }
+
     public void addCart(final Cart cart) {
         carts.add(cart);
     }
