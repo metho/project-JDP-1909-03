@@ -28,7 +28,7 @@ public class CartController {
 
     @PutMapping("product")
     public CartDto addProductToCart(ProductDto productDto) {
-        log.info("Add product {} to cart {}", productDto.getName(), productDto.getGroupId());
+        log.info("Add product {} to cart {}", productDto.getName(), productDto.getProductGroupId());
         return new CartDto();
     }
 

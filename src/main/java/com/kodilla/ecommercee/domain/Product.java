@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -58,15 +57,15 @@ public class Product {
     )
     private List<Cart> carts = new ArrayList<>();
 
-    public Product(String name, String description, BigDecimal price, boolean available) {
+    public Product(long id, String name, String description, BigDecimal price, boolean available) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.available = available;
     }
 
-    public Product(long id, String name, String description, BigDecimal price, boolean available) {
-        this.id = id;
+    public Product(String name, String description, BigDecimal price, boolean available) {
         this.name = name;
         this.description = description;
         this.price = price;

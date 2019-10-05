@@ -1,12 +1,12 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.dto.ProductDto;
-import lombok.extern.slf4j.Slf4j;
+import com.kodilla.ecommercee.exception.ProductNotFoundException;
+import com.kodilla.ecommercee.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
+import lombok.extern.slf4j.Slf4j;
 import java.util.List;
-
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -14,31 +14,36 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Slf4j
 public class ProductController {
 
-    @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    public void createProduct(@RequestBody ProductDto productDto) {
-        log.info("Create new product {}", productDto.getName());
+    @Autowired
+    private ProductService productService;
+
+    @GetMapping("all")
+    public List<ProductDto> getProducts() {
+        log.info("Get list of products");
+        return productService.getProducts();
     }
 
     @GetMapping("{productId}")
-    public ProductDto getProduct(@PathVariable Long productId) {
+    public ProductDto getProduct(@PathVariable Long productId) throws ProductNotFoundException {
         log.info("Get product by ID = {}", productId);
-        return new ProductDto();
+        return productService.getProduct(productId);
     }
 
-    @GetMapping(value = "all")
-    public List<ProductDto> getProducts() {
-        log.info("Get list of products");
-        return new ArrayList<>();
-    }
-
-    @DeleteMapping("{productId}")
-    public void deleteProduct(@PathVariable Long productId) {
-        log.info("Delete product by ID = {}", productId);
+    @PostMapping(consumes = APPLICATION_JSON_VALUE)
+    public ProductDto createProduct(@RequestBody ProductDto productDto) {
+        log.info("Create new product {}", productDto.getName());
+        return productService.createProduct(productDto);
     }
 
     @PutMapping
-    public ProductDto updateProduct(@RequestBody ProductDto productDto) {
+    public ProductDto updateProduct(@RequestBody ProductDto productDto) throws ProductNotFoundException {
         log.info("Update the product with ID = {}", productDto.getId());
-        return new ProductDto();
+        return productService.updateProduct(productDto);
+    }
+
+    @DeleteMapping("{productId}")
+    public void deleteProduct(@PathVariable Long productId) throws ProductNotFoundException {
+        log.info("Delete product by ID = {}", productId);
+        productService.deleteProduct(productId);
     }
 }
