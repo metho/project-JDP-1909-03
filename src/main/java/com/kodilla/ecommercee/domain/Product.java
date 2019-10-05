@@ -64,4 +64,11 @@ public class Product {
         this.price = price;
         this.available = available;
     }
+
+    public Product(String name, String description, BigDecimal price, boolean available) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.available = available;
+    }
 }
