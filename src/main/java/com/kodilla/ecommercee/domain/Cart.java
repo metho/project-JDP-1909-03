@@ -21,10 +21,11 @@ public class Cart {
     @Column(name = "CART_ID")
     private long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    @ManyToMany(cascade=CascadeType.ALL, mappedBy = "carts")
-    private List<Product> products = new ArrayList<>();
+    @ManyToMany(mappedBy = "carts")
+    public List<Product> products = new ArrayList<>();
+
 }

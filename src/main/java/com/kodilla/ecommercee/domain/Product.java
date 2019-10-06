@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -35,8 +34,8 @@ public class Product {
     private BigDecimal price;
 
     @NotNull
-    @Column(name = "AVAILABILITY")
-    private boolean availability;
+    @Column(name = "AVAILABLE")
+    private boolean available;
 
     @ManyToOne
     @JoinColumn(name = "PRODUCT_GROUP_ID")
@@ -58,10 +57,18 @@ public class Product {
     )
     private List<Cart> carts = new ArrayList<>();
 
-    public Product(String name, String description, BigDecimal price, boolean availability) {
+    public Product(long id, String name, String description, BigDecimal price, boolean available) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.availability = availability;
+        this.available = available;
+    }
+
+    public Product(String name, String description, BigDecimal price, boolean available) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.available = available;
     }
 }

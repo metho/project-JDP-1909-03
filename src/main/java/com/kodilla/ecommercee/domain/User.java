@@ -20,7 +20,7 @@ public class User {
     @Id
     @GeneratedValue
     @Column(name = "ID")
-    private long id;
+    private Long id;
 
     @NotNull
     @Column(name = "NAME")
@@ -40,6 +40,12 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CART_ID")
     private Cart cart;
+
+    public User(Long id, String name, String surname) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+    }
 
     public User(String name, String surname) {
         this.name = name;
