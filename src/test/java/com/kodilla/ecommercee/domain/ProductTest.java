@@ -9,8 +9,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.Optional;
 
@@ -25,7 +25,7 @@ public class ProductTest {
     CartRepository cartRepository;
     @Autowired
     ProductGroupRepository productGroupRepository;
-
+    @Transactional
     @Test
     public void saveProduct() {
         //Given
@@ -36,8 +36,6 @@ public class ProductTest {
         Long productId = product.getId();
         Optional<Product> savedProduct = productRepository.findById(productId);
         assertThat(savedProduct).isPresent();
-        //CleanUp
-        productRepository.deleteById(productId);
     }
 
     @Test
@@ -83,10 +81,6 @@ public class ProductTest {
         assertThat(savedProduct1).isPresent();
         assertThat(savedProduct2).isPresent();
         assertThat(savedProduct3).isPresent();
-        //CleanUp
-        productRepository.deleteById(product1Id);
-        productRepository.deleteById(product2Id);
-        productRepository.deleteById(product3Id);
     }
 
     @Test
@@ -130,10 +124,6 @@ public class ProductTest {
         assertThat(savedProduct1).isPresent();
         assertThat(savedProduct2).isPresent();
         assertThat(savedProduct3).isPresent();
-        //CleanUP
-        productRepository.deleteById(product1Id);
-        productRepository.deleteById(product2Id);
-        productRepository.deleteById(product3Id);
     }
 
     @Test
@@ -163,9 +153,5 @@ public class ProductTest {
         assertThat(savedProduct1).isPresent();
         assertThat(savedProduct2).isPresent();
         assertThat(savedProduct3).isPresent();
-        //CleanUP
-        productRepository.deleteById(product1Id);
-        productRepository.deleteById(product2Id);
-        productRepository.deleteById(product3Id);
     }
 }
