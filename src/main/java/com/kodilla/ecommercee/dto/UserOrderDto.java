@@ -3,10 +3,12 @@ package com.kodilla.ecommercee.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,6 +16,6 @@ public class UserOrderDto {
     private long id;
     private String number;
     private LocalDate orderDate;
-    private long userId;
+    private UserDto userDto;
     private List<ProductDto> products;
 }
