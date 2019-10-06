@@ -26,5 +26,6 @@ public class Cart {
     private User user;
 
     @ManyToMany(mappedBy = "carts")
-    private List<Product> products = new ArrayList<>();
+    public List<Product> products = new ArrayList<>();
+
 }
