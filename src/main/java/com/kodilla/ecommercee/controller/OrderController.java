@@ -24,30 +24,30 @@ public class OrderController {
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     public UserOrderDto createOrder(@RequestBody UserOrderDto userOrderDto) {
         log.info("Create new order {} for user {}", userOrderDto.getNumber(), userOrderDto.getUserDto());
-        return userOrderService.saveUserOrder(userOrderDto);
+        return userOrderService.createOrder(userOrderDto);
     }
 
     @GetMapping("{orderId}")
     public UserOrderDto getOrder(@PathVariable Long orderId) throws UserOrderNotFoundException {
         log.info("Get order by ID = {}", orderId);
-        return userOrderService.getUserOrder(orderId);
+        return userOrderService.getOrder(orderId);
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping("all")
     public List<UserOrderDto> getAllOrders() {
         log.info("Get list of orders");
-        return userOrderService.getAllUserOrder();
+        return userOrderService.getAllOrder();
     }
 
     @DeleteMapping("{orderId}")
     public void deleteOrder(@PathVariable Long orderId) {
         log.info("Delete order by ID = {}", orderId);
-        userOrderService.deleteUserOrderById(orderId);
+        userOrderService.deleteOrder(orderId);
     }
 
     @PutMapping
     public UserOrderDto updateOrders(@RequestBody UserOrderDto userOrderDto) throws UserOrderNotFoundException {
         log.info("Update the order with ID = {}", userOrderDto.getId());
-        return userOrderService.updateUserOrder(userOrderDto);
+        return userOrderService.updateOrder(userOrderDto);
     }
 }

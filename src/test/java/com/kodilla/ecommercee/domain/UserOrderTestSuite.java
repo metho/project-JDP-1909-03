@@ -25,7 +25,7 @@ public class UserOrderTestSuite {
 
     private static final String NUMBER = "101";
 
-    User user = new User(null, "Jan", "Kowalski");
+    private User user = new User("Jan", "Kowalski");
 
     @Test
     public void testFindAllOrders() {
@@ -88,7 +88,7 @@ public class UserOrderTestSuite {
         userOrderRepository.deleteById(userOrder.getId());
 
         //Then
-        Assert.assertTrue( userOrderRepository.findAll().size() == 0);
+        Assert.assertTrue(userOrderRepository.findAll().size() == 0);
 
         //CleanUp
         userRepository.delete(user);
