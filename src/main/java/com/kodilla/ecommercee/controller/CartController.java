@@ -29,26 +29,26 @@ public class CartController {
         return cartService.createEmptyCart(userId);
     }
 
-    @GetMapping("products")
-    public List<ProductDto> getCartProducts(@RequestParam Long cartId) throws CartNotFoundException {
+    @GetMapping("{cartId}/products")
+    public List<ProductDto> getCartProducts(@PathVariable Long cartId) throws CartNotFoundException {
         log.info("Get list of products in cart");
         return cartService.getCartProducts(cartId);
     }
 
-    @PutMapping("product")
-    public CartDto addProductToCart(@RequestParam Long cartId, @RequestParam Long productId) throws CartNotFoundException, ProductNotFoundException {
+    @PutMapping("{cartId}/products/{productId}")
+    public CartDto addProductToCart(@PathVariable Long cartId, @PathVariable Long productId) throws CartNotFoundException, ProductNotFoundException {
         log.info("Add product with id = {} to cart with id = {}", productId, cartId);
         return cartService.addProductToCart(cartId, productId);
     }
 
-    @DeleteMapping("product")
-    public CartDto deleteProductFromCart(@RequestParam Long cartId, @RequestParam Long productId) throws CartNotFoundException, ProductNotFoundException {
+    @DeleteMapping("{cartId}/products/{productId}")
+    public CartDto deleteProductFromCart(@PathVariable Long cartId, @PathVariable Long productId) throws CartNotFoundException, ProductNotFoundException {
         log.info("Delete product by ID = {} from cart", productId);
         return cartService.deleteProductFromCart(cartId, productId);
     }
 
-    @PostMapping("order")
-    public UserOrderDto createOrderForCart(@RequestParam Long cartId, @RequestParam String number) throws CartNotFoundException, UserNotFoundException, NumberAlreadyInDatabaseException {
+    @PostMapping("{cartId}/order")
+    public UserOrderDto createOrderForCart(@PathVariable Long cartId, @RequestParam String number) throws CartNotFoundException, UserNotFoundException, NumberAlreadyInDatabaseException {
         log.info("Create order for cart {}", cartId);
         return cartService.createOrderForCart(cartId, number);
     }

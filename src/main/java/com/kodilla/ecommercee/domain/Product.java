@@ -49,7 +49,7 @@ public class Product {
     )
     private List<UserOrder> userOrders = new ArrayList<>();
 
-    @ManyToMany()
+    @ManyToMany(cascade=CascadeType.PERSIST)
     @JoinTable(
             name = "JOIN_CART_PRODUCT",
             joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
@@ -70,13 +70,5 @@ public class Product {
         this.description = description;
         this.price = price;
         this.available = available;
-    }
-
-    public void addCart(final Cart cart) {
-        carts.add(cart);
-    }
-
-    public void deleteCart(final Cart cart) {
-        carts.remove(cart);
     }
 }

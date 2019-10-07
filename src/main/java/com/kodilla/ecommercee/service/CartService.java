@@ -47,28 +47,26 @@ public class CartService {
         cart.setUser(user);
         user.setCart(cart);
         cartRepository.save(cart);
-        return cartMapper.mapToCartDto(cart);
+        return cartMapper.toCartDto(cart);
     }
 
     public List<ProductDto> getCartProducts(final Long cartId) throws CartNotFoundException {
         Cart cart = cartRepository.findById(cartId).orElseThrow(CartNotFoundException::new);
-        return productMapper.mapToProductDtoList(cart.getProducts());
+        return productMapper.toProductDtoList(cart.getProducts());
     }
 
     public CartDto addProductToCart(final Long cartId, final Long productId) throws CartNotFoundException, ProductNotFoundException {
         Cart cart = cartRepository.findById(cartId).orElseThrow(CartNotFoundException::new);
         Product product = productRepository.findById(productId).orElseThrow(ProductNotFoundException::new);
         cart.addProduct(product);
-        product.addCart(cart);
-        return cartMapper.mapToCartDto(cart);
+        return cartMapper.toCartDto(cartRepository.save(cart));
     }
 
     public CartDto deleteProductFromCart(final Long cartId, final Long productId) throws CartNotFoundException, ProductNotFoundException {
         Cart cart = cartRepository.findById(cartId).orElseThrow(CartNotFoundException::new);
         Product product = productRepository.findById(productId).orElseThrow(ProductNotFoundException::new);
         cart.deleteProduct(product);
-        product.deleteCart(cart);
-        return cartMapper.mapToCartDto(cart);
+        return cartMapper.toCartDto(cartRepository.save(cart));
     }
 
     public UserOrderDto createOrderForCart(final Long cartId, final String number) throws CartNotFoundException, UserNotFoundException, NumberAlreadyInDatabaseException {
@@ -78,6 +76,6 @@ public class CartService {
         }
         UserOrder userOrder = new UserOrder(number, Optional.ofNullable(cart.getUser()).orElseThrow(UserNotFoundException::new));
         userOrderRepository.save(userOrder);
-        return userOrderMapper.mapToUserOrderDto(userOrder);
+        return userOrderMapper.toUserOrderDto(userOrder);
     }
 }

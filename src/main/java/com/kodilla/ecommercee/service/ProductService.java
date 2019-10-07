@@ -17,20 +17,20 @@ public class ProductService {
     private ProductRepository productRepository;
 
     public List<ProductDto> getProducts() {
-        return productMapper.mapToProductDtoList(productRepository.findAll());
+        return productMapper.toProductDtoList(productRepository.findAll());
     }
 
     public ProductDto getProduct(final Long productId) throws ProductNotFoundException {
-        return productMapper.mapToProductDto(productRepository.findById(productId).orElseThrow(ProductNotFoundException::new));
+        return productMapper.toProductDto(productRepository.findById(productId).orElseThrow(ProductNotFoundException::new));
     }
 
     public ProductDto createProduct(final ProductDto productDto) {
-        return productMapper.mapToProductDto(productRepository.save(productMapper.mapToProduct(productDto)));
+        return productMapper.toProductDto(productRepository.save(productMapper.toProduct(productDto)));
     }
 
     public ProductDto updateProduct(final ProductDto productDto) throws ProductNotFoundException {
         if (productRepository.findById(productDto.getId()).isPresent()) {
-            return productMapper.mapToProductDto(productRepository.save(productMapper.mapToProduct(productDto)));
+            return productMapper.toProductDto(productRepository.save(productMapper.toProduct(productDto)));
         }
         throw new ProductNotFoundException();
     }

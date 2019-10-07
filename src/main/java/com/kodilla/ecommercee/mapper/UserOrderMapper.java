@@ -11,13 +11,13 @@ public class UserOrderMapper {
     @Autowired
     private ProductMapper productMapper;
 
-    public UserOrderDto mapToUserOrderDto(final UserOrder userOrder) {
+    public UserOrderDto toUserOrderDto(final UserOrder userOrder) {
         return new UserOrderDto(
                 userOrder.getId(),
                 userOrder.getNumber(),
                 userOrder.getOrderDate(),
                 userOrder.getUser().getId(),
-                productMapper.mapToProductDtoList(userOrder.getProducts())
+                productMapper.toProductDtoList(userOrder.getProducts())
         );
     }
 }

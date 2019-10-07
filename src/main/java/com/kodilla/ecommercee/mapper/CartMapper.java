@@ -13,11 +13,11 @@ public class CartMapper {
     @Autowired
     private ProductMapper productMapper;
 
-    public CartDto mapToCartDto(final Cart cart) {
+    public CartDto toCartDto(final Cart cart) {
         CartDto cartDto = new CartDto();
         cartDto.setId(cart.getId());
-        Optional.ofNullable(cart.getUser()).ifPresent(user -> cartDto.setId(user.getId()));
-        cartDto.setProducts(productMapper.mapToProductDtoList(cart.getProducts()));
+        Optional.ofNullable(cart.getUser()).ifPresent(user -> cartDto.setUserId(user.getId()));
+        cartDto.setProducts(productMapper.toProductDtoList(cart.getProducts()));
         return cartDto;
     }
 }
