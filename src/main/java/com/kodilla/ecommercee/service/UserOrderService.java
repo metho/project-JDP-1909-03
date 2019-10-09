@@ -23,13 +23,13 @@ public class UserOrderService {
     }
 
     public UserOrderDto getOrder(final Long userOrderId) throws UserOrderNotFoundException {
-        return userOrderMapper.mapToUserOrderDto(userOrderRepository.findById(userOrderId)
+        return userOrderMapper.toUserOrderDto(userOrderRepository.findById(userOrderId)
                 .orElseThrow(UserOrderNotFoundException::new)
         );
     }
 
     public UserOrderDto createOrder(final UserOrderDto userOrderDto) {
-        return userOrderMapper.mapToUserOrderDto(userOrderRepository.save(userOrderMapper.mapToUserOrder(userOrderDto)));
+        return userOrderMapper.toUserOrderDto(userOrderRepository.save(userOrderMapper.mapToUserOrder(userOrderDto)));
     }
 
     public void deleteOrder(Long userOrderId) {
@@ -39,6 +39,6 @@ public class UserOrderService {
     public UserOrderDto updateOrder(final UserOrderDto userOrderDto) throws UserOrderNotFoundException {
         UserOrder userOrder = userOrderRepository
                 .findById(userOrderDto.getId()).orElseThrow(UserOrderNotFoundException::new);
-        return userOrderMapper.mapToUserOrderDto(userOrderRepository.save(userOrder));
+        return userOrderMapper.toUserOrderDto(userOrderRepository.save(userOrder));
     }
 }

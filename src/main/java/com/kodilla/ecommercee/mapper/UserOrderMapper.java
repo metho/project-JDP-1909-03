@@ -4,7 +4,6 @@ import com.kodilla.ecommercee.domain.UserOrder;
 import com.kodilla.ecommercee.dto.UserOrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,19 +11,18 @@ import java.util.stream.Collectors;
 public class UserOrderMapper {
 
     @Autowired
-    UserMapper userMapper;
-
+    private ProductMapper productMapper;
     @Autowired
-    ProductMapper productMapper;
+    private UserMapper userMapper;
 
-    public UserOrderDto mapToUserOrderDto(final UserOrder userOrder) {
+    public UserOrderDto toUserOrderDto(final UserOrder userOrder) {
         UserOrderDto userOrderDto = new UserOrderDto();
         userOrderDto.setId(userOrder.getId());
         userOrderDto.setNumber(userOrder.getNumber());
         userOrderDto.setOrderDate(userOrder.getOrderDate());
-        userOrderDto.setUserDto(userMapper.mapToUserDto(userOrder.getUser()));
+        userOrderDto.setUserDto(userMapper.toUserDto(userOrder.getUser()));
         if (userOrder.getProducts() != null) {
-            userOrderDto.setProducts(productMapper.mapToProductDtoList(userOrder.getProducts()));
+            userOrderDto.setProducts(productMapper.toProductDtoList(userOrder.getProducts()));
         }
         return userOrderDto;
     }
@@ -34,14 +32,14 @@ public class UserOrderMapper {
         userOrder.setId(userOrderDto.getId());
         userOrder.setNumber(userOrderDto.getNumber());
         userOrder.setOrderDate(userOrderDto.getOrderDate());
-        userOrder.setUser(userMapper.mapToUser(userOrderDto.getUserDto()));
+        userOrder.setUser(userMapper.toUser(userOrderDto.getUserDto()));
 
         return userOrder;
     }
 
     public List<UserOrderDto> mapToUserOrderDtoList(final List<UserOrder> userOrderList) {
         return userOrderList.stream()
-                .map(this::mapToUserOrderDto)
+                .map(this::toUserOrderDto)
                 .collect(Collectors.toList());
     }
 }
