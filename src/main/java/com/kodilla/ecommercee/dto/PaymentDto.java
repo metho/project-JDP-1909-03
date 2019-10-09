@@ -1,0 +1,25 @@
+package com.kodilla.ecommercee.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.math.BigDecimal;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class PaymentDto {
+    private Long id;
+    private Long userOrderId;
+    private BigDecimal price;
+    private boolean statusPayment;
+
+    public PaymentDto(Long id, BigDecimal price, boolean statusPayment) {
+        this.id = id;
+        this.price = price;
+        this.statusPayment = statusPayment;
+    }
+}

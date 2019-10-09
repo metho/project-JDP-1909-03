@@ -104,10 +104,10 @@ public class CartTestSuite {
 
     }
 
-    @After
-    public void cleanUp(){
-
-        cartRepository.deleteById(cart1.getId());
-        userRepository.deleteById(johnS.getId());
-    }
+//    @After
+//    public void cleanUp(){
+//
+//        cartRepository.deleteById(cart1.getId());
+//        userRepository.deleteById(johnS.getId());
+//    }
 }
