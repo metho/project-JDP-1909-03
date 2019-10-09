@@ -102,7 +102,5 @@ public class PaymentTestSuite {
         paymentRepository.deleteById(payment1.getId());
         userOrderRepository.deleteById(userOrder1.getId());
         userRepository.deleteById(user1.getId());
-
-
     }
 }
