@@ -15,11 +15,11 @@ public class PaymentDto {
     private Long id;
     private Long userOrderId;
     private BigDecimal price;
-    private boolean statusPayment;
+    private boolean paymentStatus;
 
-    public PaymentDto(Long id, BigDecimal price, boolean statusPayment) {
+    public PaymentDto(Long id, BigDecimal price, boolean paymentStatus) {
         this.id = id;
         this.price = price;
-        this.statusPayment = statusPayment;
+        this.paymentStatus = paymentStatus;
     }
 }

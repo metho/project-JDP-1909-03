@@ -31,11 +31,11 @@ public class Payment {
 
     @NotNull
     @Column(name = "STATUS_PAYMENT")
-    private boolean statusPayment;
+    private boolean paymentStatus;
 
-    public Payment(Long id, BigDecimal price, boolean statusPayment) {
+    public Payment(Long id, BigDecimal price, boolean paymentStatus) {
         this.id = id;
         this.price = price;
-        this.statusPayment = statusPayment;
+        this.paymentStatus = paymentStatus;
     }
 }

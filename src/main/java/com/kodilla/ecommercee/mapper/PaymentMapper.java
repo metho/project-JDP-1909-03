@@ -11,7 +11,7 @@ public class PaymentMapper {
         return new Payment(
                 paymentDto.getId(),
                 paymentDto.getPrice(),
-                paymentDto.isStatusPayment()
+                paymentDto.isPaymentStatus()
         );
     }
 
@@ -19,7 +19,7 @@ public class PaymentMapper {
         PaymentDto paymentDto = new PaymentDto(
                 payment.getId(),
                 payment.getPrice(),
-                payment.isStatusPayment()
+                payment.isPaymentStatus()
         );
         if(payment.getUserOrder() != null) {
             paymentDto.setUserOrderId(payment.getUserOrder().getId());

@@ -43,7 +43,7 @@ public class PaymentTestSuite {
         Payment payment = new Payment();
         payment.setUserOrder(userOrder);
         payment.setPrice(new BigDecimal("100"));
-        payment.setStatusPayment(false);
+        payment.setPaymentStatus(false);
         paymentRepository.save(payment);
 
         //When
@@ -79,13 +79,13 @@ public class PaymentTestSuite {
         Payment payment = new Payment();
         payment.setUserOrder(userOrder);
         payment.setPrice(new BigDecimal("100"));
-        payment.setStatusPayment(false);
+        payment.setPaymentStatus(false);
         paymentRepository.save(payment);
 
         Payment payment1 = new Payment();
         payment1.setUserOrder(userOrder1);
         payment1.setPrice(new BigDecimal("100"));
-        payment1.setStatusPayment(true);
+        payment1.setPaymentStatus(true);
         paymentRepository.save(payment1);
 
         //When
