@@ -1,7 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.dto.UserOrderDto;
-import com.kodilla.ecommercee.exception.UserOrderNotFoundException;
+import com.kodilla.ecommercee.exception.EntityNotFoundException;
 import com.kodilla.ecommercee.mapper.UserOrderMapper;
 import com.kodilla.ecommercee.service.UserOrderService;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ public class OrderController {
     }
 
     @GetMapping("{orderId}")
-    public UserOrderDto getOrder(@PathVariable Long orderId) throws UserOrderNotFoundException {
+    public UserOrderDto getOrder(@PathVariable Long orderId) throws EntityNotFoundException {
         log.info("Get order by ID = {}", orderId);
         return userOrderService.getOrder(orderId);
     }
@@ -46,7 +46,7 @@ public class OrderController {
     }
 
     @PutMapping
-    public UserOrderDto updateOrders(@RequestBody UserOrderDto userOrderDto) throws UserOrderNotFoundException {
+    public UserOrderDto updateOrders(@RequestBody UserOrderDto userOrderDto) throws EntityNotFoundException {
         log.info("Update the order with ID = {}", userOrderDto.getId());
         return userOrderService.updateOrder(userOrderDto);
     }

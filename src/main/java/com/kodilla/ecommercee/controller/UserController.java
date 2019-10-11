@@ -1,15 +1,14 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.dto.UserDto;
-import com.kodilla.ecommercee.exception.UserNotFoundException;
+import com.kodilla.ecommercee.exception.EntityNotFoundException;
 import com.kodilla.ecommercee.mapper.UserMapper;
 import com.kodilla.ecommercee.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -28,9 +27,9 @@ public class UserController {
     }
 
     @GetMapping("{userId}")
-    public UserDto getUser(@PathVariable Long userId) throws UserNotFoundException {
+    public UserDto getUser(@PathVariable Long userId) throws EntityNotFoundException {
         log.info("Get user by ID = {}", userId);
-        return userMapper.toUserDto(userService.getUser(userId).orElseThrow(UserNotFoundException::new));
+        return userMapper.toUserDto(userService.getUser(userId).orElseThrow(() -> new EntityNotFoundException(User.class, "id", userId.toString())));
     }
 
     @GetMapping(value = "all")
