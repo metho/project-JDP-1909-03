@@ -18,6 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class ProductTest {
     @Autowired
     ProductRepository productRepository;
@@ -25,7 +26,7 @@ public class ProductTest {
     CartRepository cartRepository;
     @Autowired
     ProductGroupRepository productGroupRepository;
-    @Transactional
+
     @Test
     public void saveProduct() {
         //Given
@@ -39,7 +40,6 @@ public class ProductTest {
     }
 
     @Test
-    @Transactional
     public void saveProductManyToManyWithCart() {
         //Given
         Product product1 = new Product("shoes", "black and winter", new BigDecimal(100), true);
@@ -84,7 +84,6 @@ public class ProductTest {
     }
 
     @Test
-    @Transactional
     public void saveProductManyToManyWithUser() {
         //Given
         Product product1 = new Product("shoes", "black and winter", new BigDecimal(100), true);
@@ -127,7 +126,6 @@ public class ProductTest {
     }
 
     @Test
-    @Transactional
     public void saveProductManyToOneWithProductGrupe() {
         Product product1 = new Product("Jacket", "black and winter", new BigDecimal(100), true);
         Product product2 = new Product("trousers", "jeans", new BigDecimal(80), true);
