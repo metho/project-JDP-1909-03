@@ -104,7 +104,7 @@ public class CartTestSuite {
 
     }
 
-    @After
+//    @After
     public void cleanUp(){
 
         cartRepository.deleteById(cart1.getId());
