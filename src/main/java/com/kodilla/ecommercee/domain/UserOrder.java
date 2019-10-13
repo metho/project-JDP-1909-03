@@ -32,6 +32,10 @@ public class UserOrder {
     private LocalDate orderDate;
 
     @NotNull
+    @Column(name = "MAIL_SENT")
+    private boolean mailSent;
+
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;

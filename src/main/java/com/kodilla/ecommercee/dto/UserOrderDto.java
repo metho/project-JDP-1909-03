@@ -16,5 +16,6 @@ public class UserOrderDto {
     private String number;
     private LocalDate orderDate;
     private UserDto userDto;
+    private boolean mailSent;
     private List<ProductDto> products;
 }
