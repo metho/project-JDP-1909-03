@@ -25,11 +25,7 @@ public class PaymentMapper {
                 paymentDto.getPrice(),
                 paymentDto.isPaymentStatus()
         );
-        try {
-            payment.setUserOrder(userOrderRepository.findById(paymentDto.getUserOrderId()).get());
-        } catch (NoSuchElementException e) {
-            throw new UserOrderNotFoundException();
-        }
+        payment.setUserOrder(userOrderRepository.findById(paymentDto.getUserOrderId()).orElseThrow(UserOrderNotFoundException::new));
         return payment;
     }
 
