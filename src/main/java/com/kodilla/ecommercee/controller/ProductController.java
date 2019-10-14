@@ -1,7 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.dto.ProductDto;
-import com.kodilla.ecommercee.exception.ProductNotFoundException;
+import com.kodilla.ecommercee.exception.EntityNotFoundException;
 import com.kodilla.ecommercee.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +24,7 @@ public class ProductController {
     }
 
     @GetMapping("{productId}")
-    public ProductDto getProduct(@PathVariable Long productId) throws ProductNotFoundException {
+    public ProductDto getProduct(@PathVariable Long productId) throws EntityNotFoundException {
         log.info("Get product by ID = {}", productId);
         return productService.getProduct(productId);
     }
@@ -36,13 +36,13 @@ public class ProductController {
     }
 
     @PutMapping
-    public ProductDto updateProduct(@RequestBody ProductDto productDto) throws ProductNotFoundException {
+    public ProductDto updateProduct(@RequestBody ProductDto productDto) throws EntityNotFoundException {
         log.info("Update the product with ID = {}", productDto.getId());
         return productService.updateProduct(productDto);
     }
 
     @DeleteMapping("{productId}")
-    public void deleteProduct(@PathVariable Long productId) throws ProductNotFoundException {
+    public void deleteProduct(@PathVariable Long productId) throws EntityNotFoundException {
         log.info("Delete product by ID = {}", productId);
         productService.deleteProduct(productId);
     }

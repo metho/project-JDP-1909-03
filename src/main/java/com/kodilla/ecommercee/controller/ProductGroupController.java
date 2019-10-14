@@ -1,7 +1,8 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.domain.ProductGroup;
 import com.kodilla.ecommercee.dto.ProductGroupDto;
-import com.kodilla.ecommercee.exception.ProductGroupNotFoundException;
+import com.kodilla.ecommercee.exception.EntityNotFoundException;
 import com.kodilla.ecommercee.mapper.ProductGroupMapper;
 import com.kodilla.ecommercee.service.ProductGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,24 +24,24 @@ public class ProductGroupController {
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     public void createProductGroup(@RequestBody ProductGroupDto productGroupDto) {
         log.info("Create new product group {}", productGroupDto.getName());
-        productGroupService.saveProductGroup(productGroupMapper.mapToProductGroup(productGroupDto));
+        productGroupService.saveProductGroup(productGroupMapper.toProductGroup(productGroupDto));
     }
 
     @GetMapping("{groupId}")
-    public ProductGroupDto getProductGroup(@PathVariable Long groupId) throws ProductGroupNotFoundException {
+    public ProductGroupDto getProductGroup(@PathVariable Long groupId) throws EntityNotFoundException {
         log.info("Get group by ID = {}", groupId);
-        return productGroupMapper.mapToProductGroupDto(productGroupService.findGroupById(groupId).orElseThrow(ProductGroupNotFoundException::new));
+        return productGroupMapper.toProductGroupDto(productGroupService.findGroupById(groupId).orElseThrow(() -> new EntityNotFoundException(ProductGroup.class, "id", groupId.toString())));
     }
 
     @GetMapping(value = "all")
     public List<ProductGroupDto> getProductGroups() {
         log.info("Get list of groups");
-        return productGroupMapper.mapToProductGroupDtoList(productGroupService.findAllProductGroups());
+        return productGroupMapper.toProductGroupDtoList(productGroupService.findAllProductGroups());
     }
 
     @PutMapping
     public ProductGroupDto updateProductGroup(@RequestBody ProductGroupDto productGroupDto) {
         log.info("Update the group with ID = {}", productGroupDto.getId());
-        return productGroupMapper.mapToProductGroupDto(productGroupService.saveProductGroup(productGroupMapper.mapToProductGroup(productGroupDto)));
+        return productGroupMapper.toProductGroupDto(productGroupService.saveProductGroup(productGroupMapper.toProductGroup(productGroupDto)));
     }
 }

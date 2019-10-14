@@ -3,44 +3,51 @@ package com.kodilla.ecommercee.controller;
 import com.kodilla.ecommercee.dto.CartDto;
 import com.kodilla.ecommercee.dto.UserOrderDto;
 import com.kodilla.ecommercee.dto.ProductDto;
+import com.kodilla.ecommercee.exception.EntityNotFoundException;
+import com.kodilla.ecommercee.exception.NumberAlreadyInDatabaseException;
+import com.kodilla.ecommercee.service.CartService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/cart")
+@RequestMapping(CartController.BASE_API)
 @Slf4j
 public class CartController {
 
-    @PostMapping("new")
-    public void createEmptyCart() {
+    static final String BASE_API = "v1/cart";
+
+    @Autowired
+    private CartService cartService;
+
+    @PostMapping()
+    public CartDto createEmptyCart(@RequestParam Long userId) throws EntityNotFoundException {
         log.info("Create new cart");
-        //implementation
+        return cartService.createEmptyCart(userId);
     }
 
-    @GetMapping("products")
-    public List<ProductDto> getCartProducts() {
+    @GetMapping("{cartId}/products")
+    public List<ProductDto> getCartProducts(@PathVariable Long cartId) throws EntityNotFoundException {
         log.info("Get list of products in cart");
-        return new ArrayList<>();
+        return cartService.getCartProducts(cartId);
     }
 
-    @PutMapping("product")
-    public CartDto addProductToCart(ProductDto productDto) {
-        log.info("Add product {} to cart {}", productDto.getName(), productDto.getProductGroupId());
-        return new CartDto();
+    @PutMapping("{cartId}/products/{productId}")
+    public CartDto addProductToCart(@PathVariable Long cartId, @PathVariable Long productId) throws EntityNotFoundException {
+        log.info("Add product with id = {} to cart with id = {}", productId, cartId);
+        return cartService.addProductToCart(cartId, productId);
     }
 
-    @DeleteMapping("product")
-    public CartDto deleteProductFromCart(Long productId) {
+    @DeleteMapping("{cartId}/products/{productId}")
+    public CartDto deleteProductFromCart(@PathVariable Long cartId, @PathVariable Long productId) throws EntityNotFoundException {
         log.info("Delete product by ID = {} from cart", productId);
-        return new CartDto();
+        return cartService.deleteProductFromCart(cartId, productId);
     }
 
-    @PostMapping("order")
-    public UserOrderDto createOrderForCart(Long cartId) {
+    @PostMapping("{cartId}/order")
+    public UserOrderDto createOrderForCart(@PathVariable Long cartId, @RequestParam String number) throws EntityNotFoundException, NumberAlreadyInDatabaseException {
         log.info("Create order for cart {}", cartId);
-        return new UserOrderDto();
+        return cartService.createOrderForCart(cartId, number);
     }
 }

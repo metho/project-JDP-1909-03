@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +25,13 @@ public class Cart {
     private User user;
 
     @ManyToMany(mappedBy = "carts")
-    public List<Product> products = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
+    public void addProduct(final Product product) {
+        products.add(product);
+    }
+
+    public void deleteProduct(final Product product) {
+        products.remove(product);
+    }
 }

@@ -13,23 +13,23 @@ public class ProductGroupMapper {
     @Autowired
     private ProductMapper productMapper;
 
-    public ProductGroupDto mapToProductGroupDto(final ProductGroup productGroup) {
+    public ProductGroupDto toProductGroupDto(final ProductGroup productGroup) {
         ProductGroupDto productGroupDto = new ProductGroupDto();
         productGroupDto.setId(productGroup.getId());
         productGroupDto.setName(productGroup.getName());
         if (productGroup.getProducts() != null) {
-            productGroupDto.setProducts(productMapper.mapToProductDtoList(productGroup.getProducts()));
+            productGroupDto.setProducts(productMapper.toProductDtoList(productGroup.getProducts()));
         }
         return productGroupDto;
     }
 
-    public List<ProductGroupDto> mapToProductGroupDtoList(final List<ProductGroup> groups) {
+    public List<ProductGroupDto> toProductGroupDtoList(final List<ProductGroup> groups) {
         return groups.stream()
-                .map(this::mapToProductGroupDto)
+                .map(this::toProductGroupDto)
                 .collect(Collectors.toList());
     }
 
-    public ProductGroup mapToProductGroup(final ProductGroupDto productGroupDto) {
+    public ProductGroup toProductGroup(final ProductGroupDto productGroupDto) {
         ProductGroup productGroup = new ProductGroup();
         productGroup.setId(productGroupDto.getId());
         productGroup.setName(productGroupDto.getName());
