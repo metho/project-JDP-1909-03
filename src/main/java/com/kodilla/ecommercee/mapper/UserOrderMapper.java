@@ -1,7 +1,11 @@
 package com.kodilla.ecommercee.mapper;
 
+import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.UserOrder;
+import com.kodilla.ecommercee.dto.ProductDto;
 import com.kodilla.ecommercee.dto.UserOrderDto;
+import com.kodilla.ecommercee.exception.EntityNotFoundException;
+import com.kodilla.ecommercee.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.List;
@@ -14,6 +18,8 @@ public class UserOrderMapper {
     private ProductMapper productMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private ProductRepository productRepository;
 
     public UserOrderDto toUserOrderDto(final UserOrder userOrder) {
         UserOrderDto userOrderDto = new UserOrderDto();
@@ -27,17 +33,23 @@ public class UserOrderMapper {
         return userOrderDto;
     }
 
-    public UserOrder mapToUserOrder(final UserOrderDto userOrderDto) {
+    public UserOrder toUserOrder(final UserOrderDto userOrderDto) {
         UserOrder userOrder = new UserOrder();
         userOrder.setId(userOrderDto.getId());
         userOrder.setNumber(userOrderDto.getNumber());
         userOrder.setOrderDate(userOrderDto.getOrderDate());
         userOrder.setUser(userMapper.toUser(userOrderDto.getUserDto()));
-
+        if (userOrderDto.getProducts() != null) {
+            for (ProductDto productDto : userOrderDto.getProducts()) {
+                Product product = productRepository.findById(productDto.getId()).orElseThrow(() -> new EntityNotFoundException(Product.class, "id", String.valueOf(productDto.getId())));
+                product.getUserOrders().add(userOrder);
+                userOrder.getProducts().add(product);
+            }
+        }
         return userOrder;
     }
 
-    public List<UserOrderDto> mapToUserOrderDtoList(final List<UserOrder> userOrderList) {
+    public List<UserOrderDto> toUserOrderDtoList(final List<UserOrder> userOrderList) {
         return userOrderList.stream()
                 .map(this::toUserOrderDto)
                 .collect(Collectors.toList());
