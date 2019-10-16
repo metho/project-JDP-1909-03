@@ -18,7 +18,7 @@ public class UserOrderService {
     UserOrderMapper userOrderMapper;
 
     public List<UserOrderDto> getAllOrder() {
-        return userOrderMapper.mapToUserOrderDtoList(userOrderRepository.findAll());
+        return userOrderMapper.toUserOrderDtoList(userOrderRepository.findAll());
     }
 
     public UserOrderDto getOrder(final Long userOrderId) throws EntityNotFoundException {
@@ -28,7 +28,7 @@ public class UserOrderService {
     }
 
     public UserOrderDto createOrder(final UserOrderDto userOrderDto) {
-        return userOrderMapper.toUserOrderDto(userOrderRepository.save(userOrderMapper.mapToUserOrder(userOrderDto)));
+        return userOrderMapper.toUserOrderDto(userOrderRepository.save(userOrderMapper.toUserOrder(userOrderDto)));
     }
 
     public void deleteOrder(Long userOrderId) {
@@ -36,8 +36,9 @@ public class UserOrderService {
     }
 
     public UserOrderDto updateOrder(final UserOrderDto userOrderDto) throws EntityNotFoundException {
-        UserOrder userOrder = userOrderRepository
-                .findById(userOrderDto.getId()).orElseThrow(() -> new EntityNotFoundException(UserOrder.class, "id", String.valueOf(userOrderDto.getId())));
-        return userOrderMapper.toUserOrderDto(userOrderRepository.save(userOrder));
+        if (userOrderRepository.findById(userOrderDto.getId()).isPresent()) {
+            return userOrderMapper.toUserOrderDto(userOrderRepository.save(userOrderMapper.toUserOrder(userOrderDto)));
+        }
+        throw new EntityNotFoundException(UserOrder.class, "id", String.valueOf(userOrderDto.getId()));
     }
 }
