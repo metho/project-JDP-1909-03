@@ -1,0 +1,17 @@
+Testing in Postman
+
+Important: Only Endpoint User is secured!
+
+1. Start Postman.
+2. Only Endpoint User is secured.
+3. First select the link with the method.
+4. Select "Authorization".
+5. Then select "Basic Auth".
+6. Enter your login and password:
+    - role ADMIN:   login - kodilla_admin,
+                    password - pass1,
+    - role USER:    login - kodilla_user,
+                    password - pass2.
+7. Enjoy. :)
+
+For the rest of the methods use "No Auth".

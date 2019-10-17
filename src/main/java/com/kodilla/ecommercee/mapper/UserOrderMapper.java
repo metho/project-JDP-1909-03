@@ -8,6 +8,7 @@ import com.kodilla.ecommercee.exception.EntityNotFoundException;
 import com.kodilla.ecommercee.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,8 @@ public class UserOrderMapper {
         userOrderDto.setNumber(userOrder.getNumber());
         userOrderDto.setOrderDate(userOrder.getOrderDate());
         userOrderDto.setUserDto(userMapper.toUserDto(userOrder.getUser()));
+        userOrder.setMailSent(userOrder.isMailSent());
+
         if (userOrder.getProducts() != null) {
             userOrderDto.setProducts(productMapper.toProductDtoList(userOrder.getProducts()));
         }
@@ -39,6 +42,7 @@ public class UserOrderMapper {
         userOrder.setNumber(userOrderDto.getNumber());
         userOrder.setOrderDate(userOrderDto.getOrderDate());
         userOrder.setUser(userMapper.toUser(userOrderDto.getUserDto()));
+        userOrder.setMailSent(userOrderDto.isMailSent());
         if (userOrderDto.getProducts() != null) {
             for (ProductDto productDto : userOrderDto.getProducts()) {
                 Product product = productRepository.findById(productDto.getId()).orElseThrow(() -> new EntityNotFoundException(Product.class, "id", String.valueOf(productDto.getId())));
