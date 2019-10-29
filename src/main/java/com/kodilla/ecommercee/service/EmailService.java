@@ -14,7 +14,6 @@ public class EmailService {
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleMailMessage.class);
     @Autowired
     private JavaMailSender javaMailSender;
-    private Mail mail;
 
     public void send(final Mail mail) {
         LOGGER.info("Starting email preparation.....");
@@ -23,7 +22,7 @@ public class EmailService {
             javaMailSender.send(mailMessage);
             LOGGER.info("Email has been sent.");
         } catch (MailException e) {
-            LOGGER.error("Failed to proces email sending", e.getMessage(), e);
+            LOGGER.error("Failed to process email sending", e.getMessage(), e);
         }
     }
 
