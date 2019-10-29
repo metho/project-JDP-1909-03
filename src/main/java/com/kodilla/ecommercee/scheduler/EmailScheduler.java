@@ -24,8 +24,9 @@ public class EmailScheduler {
     private AdminConfig adminConfig;
 
     private static final String SUBJECT = "Checking for new orders every 30 min";
+    private static final String FREQUENCY = "0 */30 * ? * *";
 
-    @Scheduled(cron="0 0/1 * * * ?")
+    @Scheduled(cron=FREQUENCY)
     public void sendInformationEmail() {
         List<UserOrder> orderToSend = userOrderRepository.findByMailSentFalse();
         for (UserOrder userOrder : orderToSend) {

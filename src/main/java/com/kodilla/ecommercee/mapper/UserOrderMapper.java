@@ -28,7 +28,7 @@ public class UserOrderMapper {
         userOrderDto.setNumber(userOrder.getNumber());
         userOrderDto.setOrderDate(userOrder.getOrderDate());
         userOrderDto.setUserDto(userMapper.toUserDto(userOrder.getUser()));
-        userOrder.setMailSent(userOrder.isMailSent());
+        userOrderDto.setMailSent(userOrder.isMailSent());
 
         if (userOrder.getProducts() != null) {
             userOrderDto.setProducts(productMapper.toProductDtoList(userOrder.getProducts()));
