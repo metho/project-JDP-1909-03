@@ -14,6 +14,8 @@ import java.util.List;
 @Component
 public class EmailScheduler {
 
+    private static final String SUBJECT = "Checking for new orders every 30 min";
+
     @Autowired
     private EmailService emailService;
 
@@ -23,10 +25,7 @@ public class EmailScheduler {
     @Autowired
     private AdminConfig adminConfig;
 
-    private static final String SUBJECT = "Checking for new orders every 30 min";
-    private static final String FREQUENCY = "0 */30 * ? * *";
-
-    @Scheduled(cron=FREQUENCY)
+    @Scheduled(cron = "${mail.frequency}")
     public void sendInformationEmail() {
         List<UserOrder> orderToSend = userOrderRepository.findByMailSentFalse();
         for (UserOrder userOrder : orderToSend) {
